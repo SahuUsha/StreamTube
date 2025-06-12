@@ -14,6 +14,7 @@ import YourVideo from './frontend/Pages/YourVideo.jsx';
 import Playvideolist from './frontend/Commponents/playvideolist.jsx';
 import AllPlaylist from './frontend/Pages/allPlaylist.jsx';
 import Dashboard from './frontend/Pages/DashboardPages.jsx';
+import Setting from './frontend/Pages/setting.jsx';
 
 function App() {
  
@@ -31,6 +32,7 @@ function App() {
      <Route path='/playlist/videos' element = {<Playvideolist/>} />
      <Route path='/allPlaylist' element={<AllPlaylist/>}  />
      <Route path='/dashboard' element={<Dashboard/>} />
+     <Route path='/setting' element={<Setting/>}/>
      
      <Route path="/home" element={<Home/>}/>
     </Routes>

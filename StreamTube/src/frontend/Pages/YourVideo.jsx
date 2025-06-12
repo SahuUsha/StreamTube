@@ -15,13 +15,19 @@ const YourVideo = () => {
 
   const handleGetYourVideo = async () => {
     try {
-      const response = await getYourVideo();
-      if (response && response.data) {
-        setYourVideos(response.data.data);
-      }
-    } catch (error) {
-      console.log("Error fetching your videos: ", error);
+    const response = await getYourVideo();
+    console.log("Video response:", response.data); // log it to inspect shape
+
+    if (Array.isArray(response.data.data)) {
+      setYourVideos(response.data.data);
+    } else {
+      setYourVideos([]); // fallback to empty array
+      console.error("Expected an array but got:", response.data.data);
     }
+  } catch (error) {
+    console.log("Error fetching your videos: ", error);
+    setYourVideos([]); // avoid undefined in UI
+  }
   };
 
   const handleDeleteVideo = async () => {
@@ -56,7 +62,7 @@ const YourVideo = () => {
             </tr>
           </thead>
           <tbody>
-            {yourVideos.map((video) => (
+            {yourVideos && yourVideos.length >0 ?  yourVideos.map((video) => (
               <tr key={video._id} className="border-b border-yellow-500">
                 <td className="p-2">
                   <video src={video.videoFile} controls className="w-56 h-16 object-cover rounded-lg" />
@@ -91,7 +97,10 @@ const YourVideo = () => {
                   </div>
                 </td>
               </tr>
-            ))}
+            )) 
+          :  <tr>
+    <td colSpan={7} className="text-center p-4 text-gray-400">No videos found. Upload one!</td>
+  </tr>}
           </tbody>
         </table>
       </div>

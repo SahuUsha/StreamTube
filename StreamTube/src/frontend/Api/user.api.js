@@ -42,3 +42,13 @@ export const registerUser=async(data)=>{
 }
 
 
+export const updatePassword = async (data) => {
+  try {
+    const response = await api.patch('/users/change-password', data);
+    console.log("update password:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("API Error:", error);
+    throw error.response?.data || error;
+  }
+};

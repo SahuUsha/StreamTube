@@ -106,7 +106,7 @@ const UploadVideo = ({ closeModal }) => {
         <div
           onClick={() => setIsPublished(!isPublished)}
           className={`w-12 h-6 flex items-center bg-gray-600 rounded-full p-1 cursor-pointer transition-colors duration-300 ${
-            isPublished ? "bg-green-500" : "bg-red-500"
+            isPublished ? "bg-yellow-500" : "bg-red-500"
           }`}
         >
           <div
@@ -118,7 +118,7 @@ const UploadVideo = ({ closeModal }) => {
       </div>
 
       <button
-        className="bg-green-500 text-white p-2 rounded-lg mt-4 hover:bg-green-400"
+        className="bg-yellow-400 text-white p-2 rounded-lg mt-4 hover:bg-yellow-500"
         onClick={handleUpload}
       >
         Upload

@@ -41,7 +41,7 @@ const CreateTweet = ({ closeModal }) => {
       )}
 
       <textarea
-        className="w-full p-2 bg-neutral-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full p-2 bg-neutral-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
         rows="3"
         placeholder="What's happening?"
         value={content}
@@ -51,7 +51,7 @@ const CreateTweet = ({ closeModal }) => {
       <button
         onClick={handleUpload}
         disabled={loading}
-        className="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-500 w-full"
+        className="mt-2 px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 disabled:bg-gray-500 w-full"
       >
         {loading ? "Posting..." : "Tweet"}
       </button>

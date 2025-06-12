@@ -48,7 +48,7 @@ const SideBar = () => {
                             <img src={playlist} className="h-[1.9rem] w-[2.0rem]" alt="" />
                             <h1 className='font-bold text-[1.1rem] p-[0.3rem] pl-5'>Your Playlist</h1>
                         </button>
-                        <button className="flex hover:bg-neutral-700 px-4 pr-24 my-3 py-[0.4rem] rounded-xl">
+                        <button onClick={() => navigate('/setting')} className="flex hover:bg-neutral-700 px-4 pr-24 my-3 py-[0.4rem] rounded-xl">
                             <img src={setting} className="h-[2.1rem] w-[2.3rem]" alt="" />
                             <h1 className='font-bold text-[1.1rem] p-[0.3rem] pl-5'>Setting</h1>
                         </button>
