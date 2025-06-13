@@ -19,6 +19,7 @@ const LoginPage = () => {
       const response = await loginUser(loginData);
       localStorage.setItem("accessToken", response.data.accessToken);
       const token = localStorage.getItem('accessToken');
+      localStorage.setItem("token",token)
       console.log("Token:", token);
       setEmail("");
       setPassword("");

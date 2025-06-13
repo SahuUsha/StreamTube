@@ -52,10 +52,7 @@ const SideBar = () => {
                             <img src={setting} className="h-[2.1rem] w-[2.3rem]" alt="" />
                             <h1 className='font-bold text-[1.1rem] p-[0.3rem] pl-5'>Setting</h1>
                         </button>
-                        <button className="flex hover:bg-neutral-700 px-4 pr-28 my-3 py-[0.4rem] rounded-xl">
-                            <img src={home} className="h-[2.2rem] w-[2.4rem]" alt="" />
-                            <h1 className='font-bold text-[1.1rem] p-[0.3rem] pl-5'>Home</h1>
-                        </button>
+                      
                     </div>
                 </div>
             )}

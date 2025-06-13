@@ -45,7 +45,7 @@ const RegisterPage = () => {
       <div className="w-1/2 flex flex-col justify-center p-8 text-white">
         <h1 className="text-[3rem] font-bold text-yellow-400 mb-6">Join StreamTube</h1>
         <p className="text-gray-400 text-xl">
-          Create an account to upload videos, interact with content, and be part of a growing community.
+          Create an account to upload videos, interact with content, and be part of it by sharing your contentsr.
         </p>
       </div>
 

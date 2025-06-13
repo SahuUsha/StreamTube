@@ -65,7 +65,7 @@ const Playlist = () => {
 
       {/* Modal/Form for Creating a Playlist */}
       {showForm && (
-        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
+       <div className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-50">
           <div className="bg-gray-900 p-6 rounded-lg w-96">
             <h2 className="text-lg font-semibold text-white mb-4">Create Playlist</h2>
 
@@ -96,7 +96,7 @@ const Playlist = () => {
             <div className="flex justify-between">
               <button
                 onClick={(e) => handleCreateResponse(e)}
-                className="bg-green-500 text-white px-4 py-2 rounded-md"
+                className="bg-yellow-500 text-white px-4 py-2 rounded-md"
               >
                 Create
               </button>

@@ -63,10 +63,10 @@ const Navbar = () => {
   const handleSignOut=async()=>{
     try {
        await logoutUser();
-      
+        localStorage.removeItem("token");
         alert("successfully logout");
         setIsProfileDDopen(!isProfileDDopen)
-        navigate("/users/login");
+        navigate("/");
     } catch (error) {
       alert("Error on signOut : ",error)
     }

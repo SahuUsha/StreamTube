@@ -3,7 +3,7 @@ import { User } from "../models/user.model.js"
 import { ApiError } from "../utils/ApiError.js"
 import ApiResponse from "../utils/ApiResponse.js"
 import { asyncHandler } from "../utils/asyncHandler.js"
-import { uploadOnCloudinary } from "../utils/cloudinary.js"
+import { deleteFromCloudinary, getPublishIdfromCloudinary, uploadOnCloudinary } from "../utils/cloudinary.js"
 
 
 const generateAccessAndRefreshToken = async(userId)=>{
@@ -303,7 +303,7 @@ const updateUserAvatar = asyncHandler(async(req,res)=>{
   
   await deleteOldImage(req.user._id , avatarLocalPath)
   
-  const avatar = await uploadOnClodinary(avatarLocalPath)
+  const avatar = await uploadOnCloudinary(avatarLocalPath)
   
   if(!avatar.url){
     throw new ApiError(400,"new avatar is failed to upload");
@@ -337,7 +337,7 @@ const updateUserAvatar = asyncHandler(async(req,res)=>{
     if(coverImageLocalPath){
       // throw new ApiError(400 ,"coverImage is missing")
       await deleteOldImage(req.user._id ,coverImageLocalPath)
-      coverImage = await uploadOnClodinary(coverImageLocalPath)
+      coverImage = await uploadOnCloudinary(coverImageLocalPath)
     }
   
    const user=  await User.findByIdAndUpdate(req.user?._id,

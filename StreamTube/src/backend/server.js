@@ -13,7 +13,8 @@ const app = express()
 // import cors from 'cors';
 
 app.use(cors({
-  origin: 'http://localhost:5173',  // Frontend URL
+
+  origin: true, 
   credentials: true,  // Allow cookies (if using cookies for token)
 }));
 

@@ -29,7 +29,7 @@ const UpdatePassword = ({onClose}) => {
           <input
             type="password"
             value={oldPassword}
-            className="text-black w-full p-2 rounded mt-1"
+            className="text-black w-full p-2 rounded mt-1 border border-yellow-400 bg-white text-black focus:outline-none focus:ring-1 focus:ring-yellow-300"
             onChange={(e) => setOldPassword(e.target.value)}
             placeholder="Enter old password"
           />
@@ -40,7 +40,7 @@ const UpdatePassword = ({onClose}) => {
           <input
             type="password"
             value={newPassword}
-            className="text-black w-full p-2 rounded mt-1"
+            className="text-black w-full p-2 rounded mt-1 border border-yellow-400 bg-white text-black focus:outline-none focus:ring-1 focus:ring-yellow-300"
             onChange={(e) => setNewPassword(e.target.value)}
             placeholder="Enter new password"
           />

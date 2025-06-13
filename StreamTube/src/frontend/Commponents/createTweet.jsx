@@ -42,7 +42,7 @@ const CreateTweet = ({ closeModal }) => {
 
       <textarea
         className="w-full p-2 bg-neutral-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500"
-        rows="3"
+        rows="6"
         placeholder="What's happening?"
         value={content}
         onChange={(e) => setContent(e.target.value)}
