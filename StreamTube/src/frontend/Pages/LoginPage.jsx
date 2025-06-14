@@ -23,7 +23,9 @@ const LoginPage = () => {
       console.log("Token:", token);
       setEmail("");
       setPassword("");
-      window.location.href = '/home';
+      // window.location.href = '/home';
+      navigate('/home');
+
     } catch (error) {
       console.error("Error during login:", error);
       setError(error.message || "Login failed. Please try again.");
