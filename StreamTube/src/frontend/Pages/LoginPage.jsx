@@ -15,21 +15,21 @@ const LoginPage = () => {
     setError("");
     const loginData = { email, password };
 
-   try {
-  const response = await loginUser(loginData);
-  const token = response.data.accessToken;
+    try {
+      const response = await loginUser(loginData);
+      localStorage.setItem("accessToken", response.data.accessToken);
+      const token = localStorage.getItem('accessToken');
+      localStorage.setItem("token",token)
+      console.log("Token:", token);
+      setEmail("");
+      setPassword("");
+      // window.location.href = '/home';
+      navigate('/home');
 
-  if (token) {
-    localStorage.setItem("accessToken", token);  // ✅ only store if valid
-    console.log("Token stored:", token);
-    navigate("/home");
-  } else {
-    setError("Login failed: Token missing.");
-  }
-} catch (error) {
-  console.error("Error during login:", error);
-  setError(error.response?.data?.message || "Login failed. Please try again.");
-}
+    } catch (error) {
+      console.error("Error during login:", error);
+      setError(error.message || "Login failed. Please try again.");
+    }
   };
 
   return (
