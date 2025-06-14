@@ -14,7 +14,8 @@ const app = express()
 
 app.use(cors({
 
-  origin: true, 
+//   origin: true, 
+  origin: "https://stream-t.netlify.app/", 
   credentials: true,  // Allow cookies (if using cookies for token)
 }));
 
