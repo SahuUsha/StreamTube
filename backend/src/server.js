@@ -15,7 +15,8 @@ const app = express()
 app.use(cors({
 
 //   origin: true, 
-origin: "https://stream-t.netlify.app", 
+// origin: "https://stream-t.netlify.app", 
+origin: "https://streamtube-mm5tbtqsz-sahuushas-projects.vercel.app", 
   credentials: true,  // Allow cookies (if using cookies for token)
 }));
 
