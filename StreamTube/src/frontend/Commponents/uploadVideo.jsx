@@ -26,7 +26,7 @@ const UploadVideo = ({ closeModal }) => {
   };
 
   return (
-    <div className="relative bg-neutral-800 rounded-2xl w-[50%] p-6 flex flex-col items-center justify-center shadow-lg">
+    <div className="relative bg-neutral-800 rounded-2xl w-full max-w-3xl max-h-[90vh] p-6 overflow-y-auto flex flex-col items-center justify-start shadow-lg scrollbar-hide">
       {/* Close Button */}
       <button
         onClick={closeModal}
@@ -37,26 +37,30 @@ const UploadVideo = ({ closeModal }) => {
 
       <h2 className="text-white text-xl font-bold mb-4">Upload Video</h2>
 
-      <label htmlFor="video" className="block text-white font-semibold mb-2">
-        Upload Video
-      </label>
-      <input
-        type="file"
-        id="video"
-        name="video"
-        accept="video/*"
-        onChange={(e) => setUploadedVideo(e.target.files[0])}
-        className="text-white bg-neutral-700 p-2 rounded-lg w-full"
-      />
+      <div className="w-full">
+        <label htmlFor="video" className="block text-white font-semibold mb-2">
+          Upload Video
+        </label>
+        <input
+          type="file"
+          id="video"
+          name="video"
+          accept="video/*"
+          onChange={(e) => setUploadedVideo(e.target.files[0])}
+          className="text-white bg-neutral-700 p-2 rounded-lg w-full"
+        />
+      </div>
 
       {uploadedVideo && (
-        <div className="mt-4">
-          <h3 className="text-white text-lg font-semibold">Preview:</h3>
-          <video
-            src={URL.createObjectURL(uploadedVideo)}
-            controls
-            className="w-full mt-2 rounded-lg"
-          />
+        <div className="mt-4 w-full">
+          <h3 className="text-white text-lg font-semibold mb-2">Preview:</h3>
+          <div className="w-full aspect-video bg-black rounded-lg overflow-hidden">
+            <video
+              src={URL.createObjectURL(uploadedVideo)}
+              controls
+              className="w-full h-full object-contain"
+            />
+          </div>
         </div>
       )}
 
@@ -105,7 +109,7 @@ const UploadVideo = ({ closeModal }) => {
         <span className="text-white font-semibold">Publish</span>
         <div
           onClick={() => setIsPublished(!isPublished)}
-          className={`w-12 h-6 flex items-center bg-gray-600 rounded-full p-1 cursor-pointer transition-colors duration-300 ${
+          className={`w-12 h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 ${
             isPublished ? "bg-yellow-500" : "bg-red-500"
           }`}
         >
@@ -118,7 +122,7 @@ const UploadVideo = ({ closeModal }) => {
       </div>
 
       <button
-        className="bg-yellow-400 text-white p-2 rounded-lg mt-4 hover:bg-yellow-500"
+        className="bg-yellow-400 text-white p-2 rounded-lg mt-6 hover:bg-yellow-500 w-full"
         onClick={handleUpload}
       >
         Upload

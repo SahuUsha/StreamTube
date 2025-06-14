@@ -11,83 +11,82 @@ import ffmpeg from 'fluent-ffmpeg';
 import { parse } from "dotenv";
 
 
-const getAllVideos = asyncHandler(async(req,res)=>{
-    const {page = 1 , limit = 10 , query , sortBy ="createdAt", sortType ,userId} = req.query
-    console.log(req.query)
+const getAllVideos = asyncHandler(async (req, res) => {
+  const {
+    page = 1,
+    limit = 10,
+    query,
+    sortBy = "createdAt",
+    sortType,
+    userId
+  } = req.query;
 
+  const videolimit = parseInt(limit);
+  const pageSkip = (page - 1) * videolimit;
+  const sortStage = {};
+  sortStage[sortBy] = sortType === 'asc' ? 1 : -1;
 
-    const videolimit = parseInt(limit);
-    const pageSkip = (page-1)*videolimit
-    const sortStage ={};
-    sortStage[sortBy] = sortType === 'asc' ? 1: -1;
-
-    const AllVideo = await Video.aggregate([
-        {
-            $match :{
-                isPublished : true,
-                // ...(query &&{ title : {$regex : query , $option : "i"}} ),
-                // ...(userId && {owner : mongoose.Types.ObjectId(userId)})             
+  const AllVideo = await Video.aggregate([
+    {
+      $match: {
+        isPublished: true,
+        // ...(query && { title: { $regex: query, $options: "i" } }),
+        // ...(userId && { owner: mongoose.Types.ObjectId(userId) })
+      },
+    },
+    {
+      $lookup: {
+        from: "users",
+        localField: "owner",
+        foreignField: "_id",
+        as: "ownerInfo",
+        pipeline: [
+          {
+            $project: {
+              username: 1,
+              avatar: 1,
             },
-        }, 
-        {
-            $lookup:{
-                from : "users",
-                localField : "owner",
-                foreignField : "_id",
-                as : "ownerInfo",
-                pipeline : [
-                    {
-                        $project :{
-                            username : 1,
-                            avatar : 1
-                        }
-                    }
-                ]
-            }
+          },
+        ],
+      },
+    },
+    {
+      $addFields: {
+        ownerDetails: {
+          $arrayElemAt: ["$ownerInfo", 0],
         },
-        {
-            $addFields :{
-                ownerDetails : {
-                    $arrayElemAt : ["$ownerDetails",0]
-                }
-            }
-        },
-        {
-           $sort : sortStage,
-        },
-        {
-            $skip : pageSkip
-        },
-        {
-             $limit : videolimit,
-        },
-        {
-            $project : {
-                _id:1,
-            videoFile : 1,
-            thumbnail : 1,
-            title : 1,
-            description:1,
-            views:1,
-            createdAt:1,
-            "ownerInfo._id" : 1,
-            "ownerInfo.username" : 1,
-            "ownerInfo.avatar" :1,
+      },
+    },
+    { $sort: sortStage },
+    { $skip: pageSkip },
+    { $limit: videolimit },
+    {
+      $project: {
+        _id: 1,
+        videoFile: 1,
+        thumbnail: 1,
+        title: 1,
+        description: 1,
+        views: 1,
+        createdAt: 1,
+        "ownerInfo._id": 1,
+        "ownerInfo.username": 1,
+        "ownerInfo.avatar": 1,
+      },
+    },
+  ]);
 
-        }
-    }
-    ])
-  
-    console.log(AllVideo)
-return res
-    .status(200)
-    .json(200,{ data : AllVideo ,meta : {
-        currentPage : parseInt(page,10),
-        limit : videolimit,
-        total :AllVideo.length,
-    }})
+  return res.status(200).json({
+    success: true,
+    data: AllVideo,
+    meta: {
+      currentPage: parseInt(page, 10),
+      limit: videolimit,
+      total: AllVideo.length,
+    },
+  });
+});
 
-})
 
 const publishVideo = asyncHandler(async(req,res)=>{
     // get what video want to upload

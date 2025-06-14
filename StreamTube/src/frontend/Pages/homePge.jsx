@@ -27,6 +27,7 @@ const Home = () => {
       });
 
       console.log("Fetched Videos:", response);
+      console.log("videos : ",response.data.data)
 
       if (response?.data?.data && Array.isArray(response.data.data)) {
         setAllVideos(response.data.data); // ✅ Set correct array
@@ -66,7 +67,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="lg:ml-[4%]">
+    <div className="lg:ml-[17%]">
       <div className="text-white ">
         <button
           onClick={handleVideos} // ✅ Correctly call function

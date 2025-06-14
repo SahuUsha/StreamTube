@@ -53,6 +53,7 @@ import videosRouter from './routes/video.router.js'
 
 
 
+
 app.use("/api/v1/users",userRouter)
 app.use("/api/v1/playlists",playlistRouter)
 app.use("/api/v1/comments" , commentRouter)
