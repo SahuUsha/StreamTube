@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { loginUser } from "../Api/user.api";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -8,6 +9,12 @@ const LoginPage = () => {
   const [error, setError] = useState("");
 
   const navigate = useNavigate(); 
+
+  useEffect(()=>{
+    localStorage.removeItem("token")
+    localStorage.removeItem("accesstoken")
+
+  },[])
 
   const handleSubmit = async (e) => {
     e.preventDefault();

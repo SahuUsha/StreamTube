@@ -20,14 +20,21 @@ const Navbar = () => {
   const profileRef = useRef(null); // Ref for detecting outside click
 
   useEffect(() => {
-    handleUserInfo();
+     const token = localStorage.getItem("accessToken");
 
-    // Close profile dropdown on outside click
-    const handleClickOutside = (event) => {
-      if (profileRef.current && !profileRef.current.contains(event.target)) {
-        setIsProfileDDopen(false);
-      }
-    };
+  if (!token) {
+    console.log("No token found, redirecting to login.");
+    navigate("/login"); // Optional, if you want forced login
+    return;
+  }
+
+  handleUserInfo();
+
+  const handleClickOutside = (event) => {
+    if (profileRef.current && !profileRef.current.contains(event.target)) {
+      setIsProfileDDopen(false);
+    }
+  };
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => document.removeEventListener("mousedown", handleClickOutside);
