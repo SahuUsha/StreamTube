@@ -10,8 +10,11 @@ const verifyJWT = asyncHandler(async(req,_,next)=>{
     try {
 
         // const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ","");
-        const token = req.cookies?.accessToken ||req.headers['Authorization']?.split(" ")[1];
-       console.log(" : ",token)
+        // const token = req.cookies?.accessToken ||req.headers['Authorization']?.split(" ")[1];
+        const token = req.cookies?.accessToken || req.headers['authorization']?.split(" ")[1];
+
+       console.log("Token received in middleware:", token);
+
         if(!token){
             throw new ApiError(401 , "Unauthorized Request: No access token provided");
         }

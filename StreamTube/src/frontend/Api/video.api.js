@@ -20,7 +20,7 @@ import axios from "axios";
 
 const API_URL = 'https://streamtube-v2gc.onrender.com/api/v1';
 
-const token = localStorage.getItem('accessToken')
+// const token = localStorage.getItem('accessToken')
 
 console.log("it is token: ",token)
 export const api = axios.create({
@@ -28,12 +28,12 @@ export const api = axios.create({
     withCredentials: true,
     headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,  // Send the token in the Authorization header
+        // Authorization: `Bearer ${token}`,  // Send the token in the Authorization header
     },
 });
 
 api.interceptors.request.use((config) => {
-    // const token = localStorage.getItem('accessToken');
+    const token = localStorage.getItem('accessToken');
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
