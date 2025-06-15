@@ -65,6 +65,8 @@ const Navbar = () => {
     try {
        await logoutUser();
         localStorage.removeItem("token");
+        localStorage.removeItem("accessToken");
+
         alert("successfully logout");
         setIsProfileDDopen(!isProfileDDopen)
         navigate("/");
