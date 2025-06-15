@@ -45,7 +45,14 @@ api.interceptors.request.use((config) => {
 export const fetchAllVideo = async (queryParams) => {
    
     try {
-        const response = await api.get('/videos', { params: queryParams });
+        const response = await axios.get('https://streamtube-v2gc.onrender.com/api/v1/videos', { params: queryParams },
+            {
+                  withCredentials: true,
+                 headers: {
+    Authorization: `Bearer ${token}`,
+  },
+            }
+        );
         console.log('Videos:', response);
         return response
     } catch (error) {
