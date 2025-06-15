@@ -8,7 +8,7 @@ const router = Router()
  router.use(verifyJWT)
 
  router.route("/videos").get(getChannelVideos)
- router.route("/stats").get(getChannelStats)
+ router.route("/stats").get(verifyJWT,getChannelStats)
 
 
 
