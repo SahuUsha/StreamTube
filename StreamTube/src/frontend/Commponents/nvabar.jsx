@@ -38,6 +38,7 @@ const Navbar = () => {
       const response = await getUserDashboard();
       if (response && response.data) {
         setUserInfo(response.data.data);
+        console.log("UserInfo : ",response.data.data)
       }
     } catch (error) {
       console.error("Error on getting userInfo in navbar: ", error);
