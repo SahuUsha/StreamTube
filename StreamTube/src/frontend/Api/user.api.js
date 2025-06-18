@@ -30,14 +30,14 @@ export const registerUser=async(data)=>{
         }
         
         const response = await api.post('/users/register',formData,{
-        
             headers :{
                 'Content-Type' : 'multipart/form-data',
             },
         });
         return response.data;
     } catch (error) {
-        console.log("Registration error : ",e)
+        console.log("Registration error : ",error)
+        throw error
     }
 }
 

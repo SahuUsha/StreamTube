@@ -36,7 +36,8 @@ const RegisterPage = () => {
       navigate("/login");
     } catch (error) {
       console.error("Error registering user:", error);
-      alert("Error : ",error)
+     alert("Error: " + (error?.response?.data?.message || error.message || "Registration failed."));
+
     }
   };
 
