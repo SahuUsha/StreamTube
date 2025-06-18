@@ -36,7 +36,7 @@ export const registerUser=async(data)=>{
         });
         return response.data;
     } catch (error) {
-        console.log("Registration error : ",error)
+        console.log("Registration error here :  ",error)
         throw error
     }
 }
