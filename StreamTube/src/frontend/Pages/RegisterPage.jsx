@@ -24,8 +24,8 @@ const RegisterPage = () => {
     setForm((prev) => ({ ...prev, [name]: files[0] }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    // e.preventDefault();
     try {
       const response = await registerUser(form);
       console.log("User registered successfully:", response);
