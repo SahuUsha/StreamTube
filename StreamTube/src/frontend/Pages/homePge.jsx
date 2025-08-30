@@ -13,6 +13,8 @@ const Home = () => {
   const [showTweets, setShowTweets] = useState(false);
   const [loading, setLoading] = useState(true);
 
+
+
   const handleVideos = async () => {
     setShowVideos(true);
     setShowTweets(false);
@@ -63,6 +65,7 @@ const Home = () => {
   };
 
   useEffect(() => {
+   
     handleVideos(); // ✅ Fetch videos on mount
   }, []);
 

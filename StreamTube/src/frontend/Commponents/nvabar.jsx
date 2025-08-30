@@ -17,6 +17,8 @@ const Navbar = () => {
 
   const navigate = useNavigate()
 
+  const token = localStorage.getItem("accessToken");
+
   const profileRef = useRef(null); // Ref for detecting outside click
 
   useEffect(() => {
@@ -24,11 +26,17 @@ const Navbar = () => {
 
   if (!token) {
     console.log("No token found, redirecting to login.");
-    navigate("/login"); // Optional, if you want forced login
+    navigate("/"); // Optional, if you want forced login
     return;
   }
 
   handleUserInfo();
+
+  const handleLogin = () => {
+    handleUserInfo();
+  };
+
+    window.addEventListener("loginSuccess", handleLogin);
 
   const handleClickOutside = (event) => {
     if (profileRef.current && !profileRef.current.contains(event.target)) {
@@ -37,8 +45,11 @@ const Navbar = () => {
   };
     document.addEventListener("mousedown", handleClickOutside);
 
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    return () => {
+    window.removeEventListener("loginSuccess", handleLogin);
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+  },[token]);
 
   const handleUserInfo = async () => {
     try {
@@ -76,6 +87,7 @@ const Navbar = () => {
 
         alert("successfully logout");
         setIsProfileDDopen(!isProfileDDopen)
+           window.location.reload();
         navigate("/");
     } catch (error) {
       alert("Error on signOut : ",error)
@@ -99,110 +111,113 @@ const Navbar = () => {
   return (
     <>
       <nav className="sticky w-[100%] relative top-0 bg-black z-50">
-        <div className="flex flex-row items-center space-x-4 p-2 px-16 justify-between">
-          {/* Menu Button */}
-          <div className="flex space-x-2">
-            <button className="text-white pr-8" onClick={toggleMenu}>
-              <div className="space-y-1">
-                <span className="block w-8 h-1 bg-white"></span>
-                <span className="block w-8 h-1 bg-white"></span>
-                <span className="block w-8 h-1 bg-white"></span>
-              </div>
-            </button>
-
-            <img src={play} className="h-[2.0rem] w-[3.3rem]" alt="Logo" />
-            <h1 className="font-bold text-[1.5rem] text-white">StreamTube</h1>
+       <div className="flex items-center justify-between px-4 py-2 md:px-16">
+      
+      {/* Left section: Menu + Logo */}
+      <div className="flex items-center space-x-4">
+        {/* Hamburger Menu */}
+        <button
+          className="text-white "
+          onClick={toggleMenu}
+          aria-label="Toggle Menu"
+        >
+          <div className="space-y-1">
+            <span className="block w-6 h-1 bg-white"></span>
+            <span className="block w-6 h-1 bg-white"></span>
+            <span className="block w-6 h-1 bg-white"></span>
           </div>
+        </button>
 
-          <div className="flex flex-row items-center space-x-7 relative">
-            {/* Create Button */}
+        {/* Logo */}
+        <div className="flex items-center space-x-2">
+          <img src={play} className="h-8 w-12" alt="Logo" />
+          <h1 className="font-bold text-xl text-white">StreamTube</h1>
+        </div>
+      </div>
+
+      {/* Right section: Buttons + Profile */}
+      <div className="flex items-center space-x-4">
+        {/* Create Button */}
+        <button
+  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+  className="
+    flex items-center justify-center px-3 py-2 rounded-3xl
+    bg-transparent text-black 
+    md:flex-row md:space-x-2 md:bg-neutral-800 md:text-white md:hover:bg-neutral-700
+    transition-colors duration-200 sm:bg-neutral-800 sm:text-white
+  "
+>
+  <span className="text-3xl text-white font-thin">+</span>
+  <span className="hidden sm:inline md:inline text-base">Create</span>
+</button>
+
+        {/* Dropdown Menu */}
+        {isDropdownOpen && (
+          <div className="absolute top-12 right-0 w-44 bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden z-50">
             <button
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="flex items-center space-x-2 px-4  bg-neutral-800 text-white rounded-3xl hover:bg-neutral-700"
+              onClick={toggleUploadModal}
+              className="block w-full text-left px-4 py-2 hover:bg-gray-700"
             >
-              <span className="text-[2rem] font-thin pb-2">+</span>
-              <span className="text-[1.2rem]">Create</span>
+              📹 Upload Video
             </button>
-
-            {/* Dropdown Menu */}
-            {isDropdownOpen && (
-              <div className="absolute top-12 right-0 w-44 bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden z-50">
-                <button
-                  onClick={toggleUploadModal}
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-700"
-                >
-                  📹 Upload Video
-                </button>
-                <button
-                  onClick={togglePostModal}
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-700"
-                >
-                  📝 Post Tweet
-                </button>
-              </div>
-            )}
-
-            {/* Profile Image */}
-            <div ref={profileRef} className="relative">
-              <button onClick={handleProfile}>
-                <div className="rounded-full">
-                  <img
-                    src={avatar}
-                    className="h-[3.1rem] w-[3.1rem] rounded-full"
-                    alt="Profile"
-                  />
-                </div>
-              </button>
-
-              {/* Profile Dropdown */}
-              {isProfileDDopen && (
-                <div className="absolute right-0 top-14 w-64 bg-black text-white rounded-lg shadow-lg overflow-hidden z-50 p-4">
-                  <div className="flex items-center gap-3 border-b border-gray-700 pb-3">
-                    <img
-                      src={avatar}
-                      alt="Profile"
-                      className="h-12 w-12 rounded-full"
-                    />
-                    <div>
-                      <h1 className="font-bold">{fullname}</h1>
-                      <h1 className="text-gray-400">@{username}</h1>
-                      <Link to="/dashboard" onClick={()=>handleToGODashboard()} className="text-blue-400">
-                        View your channel
-                      </Link>
-                    </div>
-                  </div>
-
-                  {/* Dropdown Links */}
-                  <div className="mt-3 space-y-2 text-gray-400">
-                    
-                    <button 
-                    onClick={()=>handleSignOut()}
-                     className="cursor-pointer hover:text-white">Sign Out</button>
-                    
-                  </div>
-                </div>
-              )}
-            </div>
+            <button
+              onClick={togglePostModal}
+              className="block w-full text-left px-4 py-2 hover:bg-gray-700"
+            >
+              📝 Post Tweet
+            </button>
           </div>
-        </div>
-      </nav>
+        )}
 
-      {/* Sidebar */}
-      {isMenuOpen && <SideBar />}
+        {/* Profile */}
+        <div ref={profileRef} className="relative">
+          <button onClick={handleProfile}>
+            <img
+              src={avatar}
+              className="  h-10 w-10 rounded-full"
+              alt="Profile"
+            />
+          </button>
 
-      {/* Upload Video Modal */}
-      {isUploadModal && (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-60 z-50">
-          <UploadVideo closeModal={toggleUploadModal} />
+          {/* Profile Dropdown */}
+          {isProfileDDopen && (
+            <div className="absolute right-0 top-14 w-64 bg-black text-white rounded-lg shadow-lg overflow-hidden z-50 p-4">
+              <div className="flex items-center gap-3 border-b border-gray-700 pb-3">
+                <img src={avatar} alt="Profile" className="h-12 w-12 rounded-full" />
+                <div>
+                  <h1 className="font-bold">{fullname}</h1>
+                  <h1 className="text-gray-400">@{username}</h1>
+                  <Link to="/dashboard" onClick={handleToGODashboard} className="text-blue-400">
+                    View your channel
+                  </Link>
+                </div>
+              </div>
+              <div className="mt-3 space-y-2 text-gray-400">
+                <button onClick={handleSignOut} className="hover:text-white">Sign Out</button>
+              </div>
+            </div>
+          )}
         </div>
-      )}
+      </div>
+    </div>
+  </nav>
 
-      {/* Post Tweet Modal */}
-      {isPostModelOpen && (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-60 z-50">
-          <CreateTweet closeModal={togglePostModal} />
-        </div>
-      )}
+  {/* Sidebar */}
+  {isMenuOpen && <SideBar />}
+
+  {/* Upload Video Modal */}
+  {isUploadModal && (
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
+      <UploadVideo closeModal={toggleUploadModal} />
+    </div>
+  )}
+
+  {/* Post Tweet Modal */}
+  {isPostModelOpen && (
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
+      <CreateTweet closeModal={togglePostModal} />
+    </div>
+  )}
     </>
   );
 };

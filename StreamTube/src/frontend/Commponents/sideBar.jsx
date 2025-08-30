@@ -58,11 +58,11 @@ const SideBar = () => {
             )}
 
             {/* Sidebar Toggle Button */}
-            <button 
+            {/* <button 
                 onClick={() => setIsSidebarOpen(!isSidebarOpen)} 
                 className="fixed top-4 left-4 bg-green-500 text-white p-3 rounded-full shadow-md">
                 {isSidebarOpen ? 'Close Sidebar' : 'Open Sidebar'}
-            </button>
+            </button> */}
         </>
     );
 };

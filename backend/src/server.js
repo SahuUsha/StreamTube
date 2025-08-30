@@ -10,6 +10,7 @@ dotenv.config({
 
 const app = express()
 
+
 // import cors from 'cors';
 
 app.use(cors({
@@ -19,6 +20,12 @@ app.use(cors({
 origin: "https://streamtube-mm5tbtqsz-sahuushas-projects.vercel.app", 
   credentials: true,  // Allow cookies (if using cookies for token)
 }));
+
+// app.use(cors({
+//   origin: "http://localhost:5173",
+//   credentials: true
+// }));
+
 
 app.use(express.json({limit : "20kb"}))
 

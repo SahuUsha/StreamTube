@@ -36,76 +36,94 @@ const Playvideolist = () => {
   }, [playlist.videos]);
 
   return (
-    <div className="flex h-screen bg-black text-white p-4">
-      {/* Left Section: Video Player & User Info */}
-      <div className="w-2/3 p-4">
+    <div className="flex flex-col md:flex-row h-full bg-black text-white p-2 md:p-4">
+      {/* Left Section: Video Player & Info */}
+      <div className="md:w-2/3 w-full p-2 md:p-4">
         {currentVideo ? (
           <>
-            <video src={currentVideo.videoFile} controls autoPlay className="w-full h-[400px] rounded-lg"></video>
+            <video
+              src={currentVideo.videoFile}
+              controls
+              autoPlay
+              className="w-full h-[200px] sm:h-[300px] md:h-[400px] rounded-lg"
+            />
 
             {/* User Info & Views */}
-            <div className="flex items-center gap-4 mt-3">
+            <div className="flex items-center gap-3 mt-3">
               <img
                 src={currentVideo.ownerInfo?.[0]?.avatar || "https://via.placeholder.com/40"}
                 alt="User Avatar"
                 className="w-10 h-10 rounded-full"
               />
               <div>
-                <h1 className="text-lg font-bold">{currentVideo.ownerInfo?.[0]?.username || "Unknown User"}</h1>
-                <p className="text-gray-400 text-sm">{currentVideo.views} views   {new Date(currentVideo.createdAt).toLocaleDateString()}</p>
+                <h1 className="text-base sm:text-lg font-bold">
+                  {currentVideo.ownerInfo?.[0]?.username || "Unknown User"}
+                </h1>
+                <p className="text-gray-400 text-xs sm:text-sm">
+                  {currentVideo.views} views •{" "}
+                  {new Date(currentVideo.createdAt).toLocaleDateString()}
+                </p>
               </div>
             </div>
 
-            <h1 className="text-xl font-bold mt-3">{currentVideo.title}</h1>
-            <p className="text-gray-300">{currentVideo.description}</p>
+            <h1 className="text-lg sm:text-xl font-bold mt-3">{currentVideo.title}</h1>
+            <p className="text-gray-300 text-sm sm:text-base">{currentVideo.description}</p>
           </>
         ) : (
           <p className="text-gray-500">Select a video...</p>
         )}
       </div>
 
-      {/* Right Section: Playlist Info & Videos */}
-      <div className="w-1/3 overflow-y-auto border-l border-yellow-500 p-4">
-        {/* Playlist Info (Upper Right) */}
+      {/* Right Section: Playlist & Video List */}
+      <div className="md:w-1/3 w-full overflow-y-auto border-t md:border-t-0 md:border-l border-yellow-500 p-2 md:p-4 mt-4 md:mt-0">
+        {/* Playlist Info */}
         <div className="mb-4 p-3 bg-neutral-900 rounded-lg">
-          <h2 className="text-xl text-yellow-500 font-bold">{playlist.name}</h2>
-          <p className="text-gray-400">{playlist.description}</p>
-          <p className="text-gray-400">Videos: {playlist.videos.length}</p>
+          <h2 className="text-lg sm:text-xl text-yellow-500 font-bold">{playlist.name}</h2>
+          <p className="text-gray-400 text-sm">{playlist.description}</p>
+          <p className="text-gray-400 text-sm">Videos: {playlist.videos.length}</p>
 
           {/* Playlist Creator Info */}
-          <div className="flex items-center gap-3 mt-2">
+          <div className="flex items-center gap-2 mt-2">
             <img
               src={playlist.ownerInfo[0]?.avatar || "https://via.placeholder.com/40"}
               alt="Creator Avatar"
-              className="w-10 h-10 rounded-full"
+              className="w-8 h-8 sm:w-10 sm:h-10 rounded-full"
             />
-            <h3 className="font-semibold">@{playlist.ownerInfo[0]?.username || "Unknown Creator"}</h3>
+            <h3 className="text-sm sm:text-base font-semibold">
+              @{playlist.ownerInfo[0]?.username || "Unknown Creator"}
+            </h3>
           </div>
         </div>
 
-        {/* Playlist Videos List */}
-        <h2 className="text-lg font-semibold mb-2">Videos</h2>
-        {playlist.videos.map((videoId, index) => {
+        {/* Playlist Videos */}
+        <h2 className="text-base sm:text-lg font-semibold mb-2">Videos</h2>
+        {playlist.videos.map((videoId) => {
           const video = videoDetails[videoId];
           return (
             <div
               key={videoId}
-              className={`flex gap-4 p-2 rounded-lg cursor-pointer hover:bg-neutral-700 ${
-                currentVideo?.videoFile === video?.videoFile ? "hover:bg-neutral-700" : ""
+              className={`flex gap-3 p-2 rounded-lg cursor-pointer hover:bg-neutral-700 ${
+                currentVideo?.videoFile === video?.videoFile ? "bg-neutral-800" : ""
               }`}
               onClick={() => setCurrentVideo(video)}
             >
               {video ? (
                 <>
-                  <img src={video.thumbnail || ""} alt="Thumbnail" className="w-24 h-16 object-cover rounded-md" />
-                  <div>
-                    <h1 className="text-sm font-semibold">{video.title}</h1>
-                    <p className="text-gray-500 text-xs">{video.views} views</p>
-                    <p className="text-gray-500 text-xs">@{video.ownerInfo?.[0]?.username || "Unknown"}</p>
+                  <img
+                    src={video.thumbnail || ""}
+                    alt="Thumbnail"
+                    className="w-20 h-12 sm:w-24 sm:h-16 object-cover rounded-md"
+                  />
+                  <div className="flex flex-col justify-center">
+                    <h1 className="text-xs sm:text-sm font-semibold">{video.title}</h1>
+                    <p className="text-gray-500 text-xs sm:text-xs">{video.views} views</p>
+                    <p className="text-gray-500 text-xs sm:text-xs">
+                      @{video.ownerInfo?.[0]?.username || "Unknown"}
+                    </p>
                   </div>
                 </>
               ) : (
-                <p className="text-gray-400">Loading...</p>
+                <p className="text-gray-400 text-xs sm:text-sm">Loading...</p>
               )}
             </div>
           );

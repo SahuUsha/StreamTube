@@ -3,6 +3,7 @@ import axios from "axios";
 
 
 const API_URL = 'https://streamtube-v2gc.onrender.com/api/v1';
+// const API_URL = 'http://localhost:8000/api/v1';
 
 export const api = axios.create({
     baseURL: API_URL,

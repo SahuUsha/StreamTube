@@ -21,41 +21,55 @@ const VideoEditModal = ({ video, onClose, onUpdate }) => {
   };
 
   return (
-    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-800 p-8 rounded-lg shadow-lg w-[40rem] text-white">
-      <h2 className="text-xl font-semibold mb-4">Edit Video</h2>
-
-      <label className="block mb-2 text-gray-300">Title</label>
-      <input
-        type="text"
-        className="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-
-      <label className="block mt-4 mb-2 text-gray-300">Description</label>
-      <textarea
-        className="w-full p-3 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        rows="5"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-
-      <div className="flex justify-end gap-4 mt-6">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+      <div className="bg-neutral-800 p-6 sm:p-8 rounded-lg shadow-lg w-full max-w-md sm:max-w-lg lg:max-w-2xl text-white relative">
+        {/* Close Button */}
         <button
           onClick={onClose}
-          className="px-5 py-2 rounded bg-gray-600 hover:bg-gray-500 transition-all duration-200"
+          className="absolute top-3 right-3 text-gray-400 hover:text-white text-xl"
         >
-          Cancel
+          ✖
         </button>
-        <button
-          onClick={handleUpdate}
-          className={`px-5 py-2 rounded bg-blue-600 hover:bg-blue-700 transition-all duration-200 ${
-            loading ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-          disabled={loading}
-        >
-          {loading ? "Updating..." : "Save Changes"}
-        </button>
+
+        <h2 className="text-lg sm:text-xl font-semibold mb-4">Edit Video</h2>
+
+        <label className="block mb-2 text-gray-300 text-sm sm:text-base">
+          Title
+        </label>
+        <input
+          type="text"
+          className="w-full p-2 sm:p-3 rounded bg-neutral-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+
+        <label className="block mt-4 mb-2 text-gray-300 text-sm sm:text-base">
+          Description
+        </label>
+        <textarea
+          className="w-full p-2 sm:p-3 rounded bg-neutral-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
+          rows="4"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+
+        <div className="flex flex-col sm:flex-row justify-end gap-3 sm:gap-4 mt-6">
+          <button
+            onClick={onClose}
+            className="px-4 sm:px-5 py-2 rounded bg-neutral-600 hover:bg-gray-500 transition-all duration-200 text-sm sm:text-base"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleUpdate}
+            className={`px-4 sm:px-5 py-2 rounded bg-yellow-500 hover:bg-yellow-600 transition-all duration-200 text-sm sm:text-base ${
+              loading ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            disabled={loading}
+          >
+            {loading ? "Updating..." : "Save Changes"}
+          </button>
+        </div>
       </div>
     </div>
   );

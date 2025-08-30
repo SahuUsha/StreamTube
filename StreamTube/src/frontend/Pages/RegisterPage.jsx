@@ -33,7 +33,7 @@ const RegisterPage = () => {
       navigate('/')
       setForm({ fullname: "", username: "", email: "", password: "", avatar: null, coverImage: null });
 
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       console.error("Error registering user:", error);
      alert("Error: " + (error?.response?.data?.message || error.message || "Registration failed."));
