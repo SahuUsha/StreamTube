@@ -12,19 +12,25 @@ const app = express()
 
 
 // import cors from 'cors';
+const allowedOrigins = [
+  "http://localhost:5173", // local dev
+  "https://streamtube-mm5tbtqsz-sahuushas-projects.vercel.app", // main deployed frontend
+  "https://streamtube-h3z6vfyzu-sahuushas-projects.vercel.app", // preview deployment
+];
 
-app.use(cors({
-
-//   origin: true, 
-// origin: "https://stream-t.netlify.app", 
-origin: "https://streamtube-mm5tbtqsz-sahuushas-projects.vercel.app", 
-  credentials: true,  // Allow cookies (if using cookies for token)
-}));
-
-// app.use(cors({
-//   origin: "http://localhost:5173",
-//   credentials: true
-// }));
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // allow requests with no origin (like mobile apps, curl, etc.)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 
 
 app.use(express.json({limit : "20kb"}))
