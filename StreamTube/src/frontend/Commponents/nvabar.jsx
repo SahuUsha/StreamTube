@@ -32,11 +32,11 @@ const Navbar = () => {
 
   handleUserInfo();
 
-  const handleLogin = () => {
-    handleUserInfo();
-  };
+  // const handleLogin = () => {
+  //   handleUserInfo();
+  // };
 
-    window.addEventListener("loginSuccess", handleLogin);
+    // window.addEventListener("loginSuccess", handleLogin);
 
   const handleClickOutside = (event) => {
     if (profileRef.current && !profileRef.current.contains(event.target)) {
@@ -46,7 +46,7 @@ const Navbar = () => {
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
-    window.removeEventListener("loginSuccess", handleLogin);
+    // window.removeEventListener("loginSuccess", handleLogin);
     document.removeEventListener("mousedown", handleClickOutside);
   };
   },[token]);

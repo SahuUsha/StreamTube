@@ -39,7 +39,7 @@ const LoginPage = () => {
       // window.location.href = '/home';
       //  window.location.reload();
 
-        window.dispatchEvent(new Event("loginSuccess"));
+        // window.dispatchEvent(new Event("loginSuccess"));
       navigate('/home');
       
 
