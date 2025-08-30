@@ -37,7 +37,7 @@ app.use(cors({
     origin: [
         // 'https://streamtube-rjpiz2tco-sahuushas-projects.vercel.app', // your Vercel frontend
         // "https://streamtube-b08xqxs2l-sahuushas-projects.vercel.app",
-        "https://streamtube-27by25m69-sahuushas-projects.vercel.app",
+        "https://streamtube-ojfh8upll-sahuushas-projects.vercel.app/",
         'http://localhost:5173' // for local testing
     ],
     credentials: true, // allow cookies
