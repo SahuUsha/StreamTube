@@ -35,7 +35,7 @@ const app = express()
 
 app.use(cors({
     origin: [
-        "https://streamtube-br7v56cp5-sahuushas-projects.vercel.app",
+        "https://streamtube-eypdgibyl-sahuushas-projects.vercel.app",
         'http://localhost:5173' // for local testing
     ],
     credentials: true, // allow cookies

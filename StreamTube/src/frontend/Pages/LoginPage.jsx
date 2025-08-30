@@ -10,11 +10,11 @@ const LoginPage = () => {
 
   const navigate = useNavigate(); 
 
-  // useEffect(()=>{
-  //   localStorage.removeItem("token")
-  //   localStorage.removeItem("accesstoken")
+  useEffect(()=>{
+    localStorage.removeItem("token")
+    localStorage.removeItem("accesstoken")
 
-  // },[])
+  },[])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
