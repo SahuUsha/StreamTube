@@ -87,7 +87,7 @@ const Navbar = () => {
 
         alert("successfully logout");
         setIsProfileDDopen(!isProfileDDopen)
-          //  window.location.reload();
+           window.location.reload();
         navigate("/");
     } catch (error) {
       alert("Error on signOut : ",error)
