@@ -15,7 +15,8 @@ const app = express()
 const allowedOrigins = [
   "http://localhost:5173", // local dev
 //   "https://streamtube-mm5tbtqsz-sahuushas-projects.vercel.app", // main deployed frontend
-  "https://streamtube-h3z6vfyzu-sahuushas-projects.vercel.app", // preview deployment
+  // "https://streamtube-h3z6vfyzu-sahuushas-projects.vercel.app", // preview deployment
+  "https://streamtube-rjpiz2tco-sahuushas-projects.vercel.app"
 ];
 
 app.use(
