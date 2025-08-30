@@ -49,7 +49,7 @@ export const fetchAllVideo = async (queryParams) => {
     console.log('Token from localStorage:', token);
    
     try {
-        const response = await axios.get('https://streamtube-v2gc.onrender.com/api/v1/videos', { params: queryParams ,
+        const response = await api.get(`${API_URL}/videos`, { params: queryParams ,
         // const response = await axios.get('http://localhost:8000/api/v1/videos', { params: queryParams ,
             
                   withCredentials: true,

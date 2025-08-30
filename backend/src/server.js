@@ -14,7 +14,7 @@ const app = express()
 // import cors from 'cors';
 const allowedOrigins = [
   "http://localhost:5173", // local dev
-  "https://streamtube-mm5tbtqsz-sahuushas-projects.vercel.app", // main deployed frontend
+//   "https://streamtube-mm5tbtqsz-sahuushas-projects.vercel.app", // main deployed frontend
   "https://streamtube-h3z6vfyzu-sahuushas-projects.vercel.app", // preview deployment
 ];
 
