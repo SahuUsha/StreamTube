@@ -11,27 +11,35 @@ dotenv.config({
 const app = express()
 
 
-// import cors from 'cors';
-const allowedOrigins = [
-  "http://localhost:5173", // local dev
-//   "https://streamtube-mm5tbtqsz-sahuushas-projects.vercel.app", // main deployed frontend
-  // "https://streamtube-h3z6vfyzu-sahuushas-projects.vercel.app", // preview deployment
-  "https://streamtube-rjpiz2tco-sahuushas-projects.vercel.app"
-];
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      // allow requests with no origin (like mobile apps, curl, etc.)
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-  })
-);
+// const allowedOrigins = [
+//   "http://localhost:5173", // local dev
+// //   "https://streamtube-mm5tbtqsz-sahuushas-projects.vercel.app", // main deployed frontend
+//   // "https://streamtube-h3z6vfyzu-sahuushas-projects.vercel.app", // preview deployment
+//   "https://streamtube-rjpiz2tco-sahuushas-projects.vercel.app"
+// ];
+
+// app.use(
+//   cors({
+//     origin: function (origin, callback) {
+//       // allow requests with no origin (like mobile apps, curl, etc.)
+//       if (!origin || allowedOrigins.includes(origin)) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error("Not allowed by CORS"));
+//       }
+//     },
+//     credentials: true,
+//   })
+// );
+
+app.use(cors({
+    origin: [
+        'https://streamtube-rjpiz2tco-sahuushas-projects.vercel.app', // your Vercel frontend
+        'http://localhost:3000' // for local testing
+    ],
+    credentials: true, // allow cookies
+}));
 
 
 app.use(express.json({limit : "20kb"}))
